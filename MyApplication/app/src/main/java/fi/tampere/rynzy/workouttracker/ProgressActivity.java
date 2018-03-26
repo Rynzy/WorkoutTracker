@@ -1,13 +1,15 @@
-package fi.tampere.rynzy.myapplication;
+package fi.tampere.rynzy.workouttracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainApp extends AppCompatActivity {
+import fi.tampere.rynzy.myapplication.R;
+
+public class ProgressActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_app);
+        setContentView(R.layout.activity_progress);
     }
 }

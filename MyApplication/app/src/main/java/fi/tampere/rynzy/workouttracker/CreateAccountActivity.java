@@ -1,9 +1,9 @@
-package fi.tampere.rynzy.myapplication;
+package fi.tampere.rynzy.workouttracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -12,7 +12,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import fi.tampere.rynzy.myapplication.R;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         weightInput = (EditText) findViewById(R.id.weightInput);
         weightOk = true;
         nameOk = true;
-        readFile();
+        createMoves();
     }
 
     public void checkInfo(View view) {
@@ -58,10 +61,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         Date today = new Date();
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
         String date = DATE_FORMAT.format(today);
-        String mycontent = nameInput.getText().toString() + "\n" + weightInput.getText() + "\n" + date;
-
-
-        Log.d("fd", "" + fileWithinMyDir.length());
+        String mycontent = "Name:" + nameInput.getText().toString() + "\n" + "Weight:" + weightInput.getText() + "\nDate:" + date;
 
         try (FileOutputStream out = new FileOutputStream(fileWithinMyDir)) {
 
@@ -70,19 +70,20 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
 
             byte[] bytesArray = mycontent.getBytes();
-
-
             out.write(bytesArray);
             out.flush();
-            Log.d("fd", "" + fileWithinMyDir.length());
 
         } catch (IOException ex) {
 
         }
 
-        System.out.println(fileWithinMyDir.getAbsolutePath());
-        System.out.println(fileWithinMyDir.getAbsoluteFile());
-        readFile();
+        redirect();
+
+    }
+
+    public void redirect() {
+        Intent myIntent = new Intent(CreateAccountActivity.this, MainApp.class);
+        CreateAccountActivity.this.startActivity(myIntent);
     }
 
     public void readFile() {
@@ -105,7 +106,38 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         }
 
-        System.out.println(fileContent.toString());
+    }
+
+    public void createMoves() {
+        File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
+        File fileWithinMyDir = new File(mydir, "moves.txt");
+        ArrayList<Move> moves = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        moves.add(new Move("Push-Up"));
+        moves.add(new Move("Pull-Up"));
+        moves.add(new Move("High Plank"));
+        moves.add(new Move("Bodyweight Squat"));
+        moves.add(new Move("Reverse Lunge"));
+        moves.add(new Move("Burpee"));
+
+        try (FileOutputStream out = new FileOutputStream(fileWithinMyDir)) {
+
+            if (!fileWithinMyDir.exists()) {
+                fileWithinMyDir.createNewFile();
+            }
+
+            for (Move move : moves) {
+                sb.append(move + "\n");
+            }
+
+            byte[] converions = sb.toString().getBytes();
+
+            out.write(converions);
+            out.flush();
+
+        } catch (IOException ex) {
+
+        }
 
     }
 }

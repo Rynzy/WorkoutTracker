@@ -1,4 +1,4 @@
-package fi.tampere.rynzy.myapplication;
+package fi.tampere.rynzy.workouttracker;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

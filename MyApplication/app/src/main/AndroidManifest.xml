@@ -9,15 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="fi.tampere.rynzy.workouttracker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".MainApp"></activity>
+        <activity android:name="fi.tampere.rynzy.workouttracker.CreateAccountActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.MainApp" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.ProgressActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.SettingsActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.RoutinesActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.MovesActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.ListActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.WorkoutActivity"></activity>
     </application>
 
 </manifest>
