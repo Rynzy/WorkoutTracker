@@ -21,9 +21,9 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@android:color/holo_blue_bright"
+                android:onClick="movesButton"
                 android:scaleType="fitCenter"
-                android:src="@drawable/moves"
-                android:onClick="movesButton"/>
+                android:src="@drawable/moves" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,9 +46,9 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@android:color/holo_purple"
+                android:onClick="routinesButton"
                 android:scaleType="fitCenter"
-                android:src="@drawable/routines"
-                android:onClick="routinesButton"/>
+                android:src="@drawable/routines" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,9 +79,9 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@android:color/holo_red_light"
+                android:onClick="progressButton"
                 android:scaleType="fitCenter"
-                android:src="@drawable/progress"
-                android:onClick="progressButton"/>
+                android:src="@drawable/progress" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,9 +104,9 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:background="@android:color/holo_orange_light"
+                android:onClick="settingsButton"
                 android:scaleType="fitCenter"
-                android:src="@drawable/settings"
-                android:onClick="settingsButton"/>
+                android:src="@drawable/settings" />
 
             <TextView
                 android:layout_width="wrap_content"

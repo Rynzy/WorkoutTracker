@@ -1,8 +1,6 @@
 package fi.tampere.rynzy.workouttracker;
 
 
-import android.widget.TextView;
-
 public class Timer {
     private int minutes;
     private int seconds;
@@ -36,11 +34,11 @@ public class Timer {
 
         };
 
-        if(!running) {
+        if (!running) {
 
 
-        Thread t = new Thread(runnable);
-        t.start();
+            Thread t = new Thread(runnable);
+            t.start();
         }
 
     }

@@ -1,7 +1,7 @@
 package fi.tampere.rynzy.workouttracker;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import fi.tampere.rynzy.myapplication.R;
 

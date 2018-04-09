@@ -10,7 +10,6 @@ import fi.tampere.rynzy.myapplication.R;
 public class MainApp extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +26,8 @@ public class MainApp extends AppCompatActivity {
 
     public void routinesButton(View view) {
         System.out.println("routines");
+        Intent myIntent = new Intent(MainApp.this, RoutinesActivity.class);
+        MainApp.this.startActivity(myIntent);
     }
 
     public void progressButton(View view) {

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="fi.tampere.rynzy.myapplication.fi.tampere.rynzy.workouttracker.MovesActivity">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,9 +12,52 @@
         android:textSize="32dp"
         android:textStyle="bold|italic" />
 
+    <Button
+        android:id="@+id/createMoveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createAMove"
+        android:text="Create a new move" />
+
+    <RelativeLayout
+        android:id="@+id/createLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/moveLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Name of the move: " />
+
+        <EditText
+            android:id="@+id/newMoveName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/moveLabel"
+            android:layout_toRightOf="@id/moveLabel"
+            android:hint="name"
+            android:maxLength="50"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/addTheMove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/moveLabel"
+            android:layout_marginTop="50dp"
+            android:onClick="addTheMove"
+            android:text="Add move" />
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="3dp" />
+
+
 </LinearLayout>

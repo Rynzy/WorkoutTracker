@@ -110,9 +110,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     public void createMoves() {
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
-        File fileWithinMyDir = new File(mydir, "moves.txt");
         ArrayList<Move> moves = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
         moves.add(new Move("Push-Up"));
         moves.add(new Move("Pull-Up"));
         moves.add(new Move("High Plank"));
@@ -120,23 +118,34 @@ public class CreateAccountActivity extends AppCompatActivity {
         moves.add(new Move("Reverse Lunge"));
         moves.add(new Move("Burpee"));
 
-        try (FileOutputStream out = new FileOutputStream(fileWithinMyDir)) {
+        File movesDir = new File(mydir, "moves");
+        File routinesDir = new File(mydir, "routines");
 
-            if (!fileWithinMyDir.exists()) {
-                fileWithinMyDir.createNewFile();
+        if (!movesDir.exists()) {
+            movesDir.mkdir();
+        }
+
+        if (!routinesDir.exists()) {
+            routinesDir.mkdir();
+        }
+
+        for (Move move : moves) {
+            File fileWithinMyDir = new File(movesDir, move.getName() + ".txt");
+
+            try (FileOutputStream out = new FileOutputStream(fileWithinMyDir)) {
+
+                if (!fileWithinMyDir.exists()) {
+                    fileWithinMyDir.createNewFile();
+                }
+
+                byte[] converions = move.toString().getBytes();
+
+                out.write(converions);
+                out.flush();
+
+            } catch (IOException ex) {
+
             }
-
-            for (Move move : moves) {
-                sb.append(move + "\n");
-            }
-
-            byte[] converions = sb.toString().getBytes();
-
-            out.write(converions);
-            out.flush();
-
-        } catch (IOException ex) {
-
         }
 
     }

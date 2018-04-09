@@ -1,9 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fi.tampere.rynzy.myapplication.fi.tampere.rynzy.workouttracker.RoutinesActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Workout Routines"
+        android:textSize="32dp"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/createRoutineButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createARoutine"
+        android:text="Create a new routine" />
+
+    <RelativeLayout
+        android:id="@+id/createLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/routineLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Name of the routine: " />
+
+        <EditText
+            android:id="@+id/newRoutineName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/routineLabel"
+            android:layout_toRightOf="@id/routineLabel"
+            android:hint="name"
+            android:maxLength="50"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/firstMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/routineLabel"
+            android:layout_marginTop="20dp"
+            android:text="First move: " />
+
+        <Spinner
+            android:id="@+id/spinnerfirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/firstMove"
+            android:layout_toEndOf="@+id/firstMove"
+            android:drawSelectorOnTop="true" />
+
+        <TextView
+            android:id="@+id/secondMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/firstMove"
+            android:layout_marginTop="20dp"
+            android:text="Second move: " />
+
+        <Spinner
+            android:id="@+id/spinnersecond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/secondMove"
+            android:layout_toEndOf="@+id/secondMove"
+            android:drawSelectorOnTop="true" />
+
+        <TextView
+            android:id="@+id/thirdMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/secondMove"
+            android:layout_marginTop="20dp"
+            android:text="Third move: " />
+
+        <Spinner
+            android:id="@+id/spinnerthird"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/thirdMove"
+            android:layout_toEndOf="@+id/thirdMove"
+            android:drawSelectorOnTop="true" />
+
+        <TextView
+            android:id="@+id/fourthMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/thirdMove"
+            android:layout_marginTop="20dp"
+            android:text="Fourth move: " />
+
+        <Spinner
+            android:id="@+id/spinnerfourth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/fourthMove"
+            android:layout_toEndOf="@+id/fourthMove"
+            android:drawSelectorOnTop="true" />
+
+        <TextView
+            android:id="@+id/fifthMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fourthMove"
+            android:layout_marginTop="20dp"
+            android:text="Fifth move: " />
+
+        <Spinner
+            android:id="@+id/spinnerfifth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/fifthMove"
+            android:layout_toEndOf="@+id/fifthMove"
+            android:drawSelectorOnTop="true" />
+
+        <Button
+            android:id="@+id/addTheRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="50dp"
+            android:onClick="addTheRoutine"
+            android:text="Add routine" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="3dp" />
+
+
+</LinearLayout>
