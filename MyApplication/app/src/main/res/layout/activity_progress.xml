@@ -5,14 +5,6 @@
     android:orientation="vertical"
     android:theme="@style/Theme.AppCompat">
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="You can view your progress here."
-        android:textSize="32dp" />
-
 
     <TextView
         android:layout_width="match_parent"
@@ -20,71 +12,129 @@
         android:layout_marginTop="20sp"
         android:text="Weight"
         android:textAlignment="center"
-        android:textSize="36sp" />
+        android:textSize="32sp"
+        android:textStyle="bold|italic" />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40sp"
+        android:background="#A3A3A3"
+        android:gravity="center"
         android:stretchColumns="*">
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start" />
+                android:text="Start"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Min" />
+                android:text="Min"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max" />
+                android:text="Max"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current" />
+                android:text="Current"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change" />
+                android:text="Change"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="25sp"
+                android:textStyle="bold" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#DBDBDB">
 
             <TextView
                 android:id="@+id/startWeight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/lowestWeight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/highestWeight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/currentWeight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="16sp" />
 
 
             <TextView
                 android:id="@+id/changeWeight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#7D7D7D"
+                android:textSize="16sp" />
         </TableRow>
     </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:onClick="deleteAccount"
+            android:text="Delete profile" />
+    </RelativeLayout>
 
 
 </LinearLayout>

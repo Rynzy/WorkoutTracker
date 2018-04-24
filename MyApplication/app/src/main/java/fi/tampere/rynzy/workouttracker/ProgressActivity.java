@@ -1,19 +1,25 @@
 package fi.tampere.rynzy.workouttracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
 import fi.tampere.rynzy.myapplication.R;
 
 /**
  * ProgressActivity where user can see his weight gain/loss.
- *
+ * <p>
  * Account file is loaded and parsed.
  * Populates the tables data with the values.
  *
@@ -47,9 +53,8 @@ public class ProgressActivity extends AppCompatActivity {
 
     /**
      * Reads the account file for weight data.
-     *
+     * <p>
      * Values for the textviews are also set here.
-     *
      */
     public void readWeight() {
 
@@ -72,7 +77,6 @@ public class ProgressActivity extends AppCompatActivity {
             ArrayList<Double> cut = new ArrayList<>();
 
             double startW = Double.parseDouble(lines[2].split("\n")[0]);
-            start.setText("" + startW);
             double minW = Double.parseDouble(lines[2].split("\n")[0]);
             double maxW = Double.parseDouble(lines[2].split("\n")[0]);
 
@@ -95,7 +99,8 @@ public class ProgressActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("#.##");
             min.setText("" + df.format(minW));
             max.setText("" + df.format(maxW));
-            current.setText("" + cut.get(cut.size() - 1));
+            current.setText("" + df.format(cut.get(cut.size() - 1)));
+            start.setText("" + df.format(startW));
             double c = startW - cut.get(cut.size() - 1);
 
             change.setText("" + df.format(c));
@@ -104,5 +109,59 @@ public class ProgressActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
+    }
+
+    /**
+     * Asks the user if hes sure that he wants his
+     * account to be deleted.
+     * <p>
+     * If user is sure of the delete, calls for destruction of files.
+     *
+     * @param v Clicked View element, in this case a button.
+     */
+    public void deleteAccount(View v) {
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Delete account")
+                .setMessage("Do you want to delete this account and all the data associated with it?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    removeAccount();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    /**
+     * Removes all the moves, routines, weight data of the user.
+     * <p>
+     * After removing all the files, user will be redirected to the account creation.
+     */
+    public void removeAccount() {
+        File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
+        File movesDir = new File(mydir, "moves");
+        File[] myMoves = movesDir.listFiles();
+        File routinesDir = new File(mydir, "routines");
+        File[] myRoutines = routinesDir.listFiles();
+        File account = new File(mydir, "account.txt");
+
+        for (File move : myMoves) {
+            move.delete();
+        }
+
+        for (File routine : myRoutines) {
+            routine.delete();
+        }
+
+        movesDir.delete();
+        routinesDir.delete();
+        account.delete();
+
+        Toast.makeText(this, "Account removed.",
+                Toast.LENGTH_LONG).show();
+        Intent myIntent = new Intent(ProgressActivity.this, MainActivity.class);
+        ProgressActivity.this.startActivity(myIntent);
     }
 }

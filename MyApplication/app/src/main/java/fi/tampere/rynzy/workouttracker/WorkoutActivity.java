@@ -9,12 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import fi.tampere.rynzy.myapplication.R;
 
 /**
@@ -56,6 +58,7 @@ public class WorkoutActivity extends AppCompatActivity {
         currentMax = findViewById(R.id.max);
         current = findViewById(R.id.currentAmount);
 
+
         Bundle extras = getIntent().getExtras();
         String data = extras.getString("name");
         moveName.setText(data);
@@ -96,8 +99,8 @@ public class WorkoutActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (timerOn) {
-                        Thread.sleep(1000);
                         runOnUiThread(() -> timerView.setText(timer.toString()));
+                        Thread.sleep(1000);
                     }
                 } catch (InterruptedException e) {
                 }
@@ -196,6 +199,11 @@ public class WorkoutActivity extends AppCompatActivity {
             Toast.makeText(this, "Workout saved!",
                     Toast.LENGTH_LONG).show();
             current.setText("");
+            timerOn = false;
+            Button bt = findViewById(R.id.timerButton);
+            bt.setText("START");
+            timerView.setText("00:00:00");
+            timer = new Timer();
         } else {
             current.setError("You have to set the amount of moves you completed.");
         }
@@ -208,7 +216,7 @@ public class WorkoutActivity extends AppCompatActivity {
         if (current.getText().toString().isEmpty()) {
             return false;
         }
-        return (Integer.parseInt(current.getText().toString()) > 0);
+        return (Integer.parseInt(current.getText().toString()) >= 0);
     }
 
 }

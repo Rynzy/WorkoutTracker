@@ -1,6 +1,7 @@
 package fi.tampere.rynzy.workouttracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import fi.tampere.rynzy.myapplication.R;
 
 /**
@@ -37,7 +40,7 @@ public class SetWorkoutActivity extends AppCompatActivity {
     /**
      * TextView elements for displaying data.
      */
-    private TextView moveName, timerView, currentMax, current, routineName, currentView, totalView;
+    private TextView moveName, timerView, currentMax, current, routineName, actual;
     /**
      * Boolean to check if the timer is on.
      */
@@ -63,17 +66,13 @@ public class SetWorkoutActivity extends AppCompatActivity {
         timer = new Timer();
         moveName = findViewById(R.id.moveName);
         routineName = findViewById(R.id.routineName);
-        currentView = findViewById(R.id.currentMove);
-        totalView = findViewById(R.id.totalAmount);
         timerView = findViewById(R.id.timer);
         currentMax = findViewById(R.id.max);
         current = findViewById(R.id.currentAmount);
-
+        actual = findViewById(R.id.actual);
         Bundle extras = getIntent().getExtras();
         String data = extras.getString("routineName");
-
         routineName.setText(data);
-
         timerView.setText(timer.toString());
         timerOn = false;
         listOfMove = new ArrayList<>();
@@ -84,11 +83,11 @@ public class SetWorkoutActivity extends AppCompatActivity {
             removeFile();
             Toast.makeText(this, "Routine doesn't have any moves.",
                     Toast.LENGTH_LONG).show();
-            finish();
+            Intent myIntent = new Intent(SetWorkoutActivity.this, MainActivity.class);
+            SetWorkoutActivity.this.startActivity(myIntent);
 
         } else {
             initCurrentMove();
-            totalView.setText("/" + listOfMove.size());
         }
     }
 
@@ -125,8 +124,8 @@ public class SetWorkoutActivity extends AppCompatActivity {
             public void run() {
                 try {
                     while (timerOn) {
-                        Thread.sleep(1000);
                         runOnUiThread(() -> timerView.setText(timer.toString()));
+                        Thread.sleep(1000);
                     }
                 } catch (InterruptedException e) {
                 }
@@ -197,6 +196,8 @@ public class SetWorkoutActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Routine completed!",
                         Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(SetWorkoutActivity.this, RoutinesActivity.class);
+                SetWorkoutActivity.this.startActivity(myIntent);
                 timerOn = false;
             }
 
@@ -214,7 +215,7 @@ public class SetWorkoutActivity extends AppCompatActivity {
         if (current.getText().toString().isEmpty()) {
             return false;
         }
-        return (Integer.parseInt(current.getText().toString()) > 0);
+        return (Integer.parseInt(current.getText().toString()) >= 0);
     }
 
     /**
@@ -255,7 +256,6 @@ public class SetWorkoutActivity extends AppCompatActivity {
             }
         }
 
-
     }
 
     /**
@@ -285,11 +285,12 @@ public class SetWorkoutActivity extends AppCompatActivity {
         String[] conts = fileContent.toString().split(":");
         currentMax.setText("Current max: " + conts[2]);
         moveName.setText(conts[1]);
-        currentView.setText("" + (currentMoveIndex + 1));
         timerOn = false;
         Button bt = findViewById(R.id.timerButton);
         bt.setText("START");
+        timerView.setText("00:00:00");
         timer = new Timer();
+        actual.setText("" + (currentMoveIndex + 1) + "/" + listOfMove.size());
     }
 
     /**

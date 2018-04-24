@@ -175,6 +175,11 @@ public class MovesActivity extends AppCompatActivity {
             te.setError("You have to set a name for your move.");
             proceed = false;
         }
+
+        if(newName.contains(":")) {
+            te.setError("Move's name cannot contain illegal characters: ':'");
+            proceed = false;
+        }
         if (proceed) {
             for (String name : moveList) {
                 if (newName.equals(name)) {

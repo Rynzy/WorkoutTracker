@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
 
     <TextView
         android:id="@+id/moveName"
@@ -44,7 +46,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Current amount"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="8"
+        />
 
     <Button
         android:layout_width="wrap_content"

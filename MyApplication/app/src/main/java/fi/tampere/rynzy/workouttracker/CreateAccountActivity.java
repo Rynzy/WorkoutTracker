@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import fi.tampere.rynzy.myapplication.R;
 
 /**
@@ -59,13 +61,19 @@ public class CreateAccountActivity extends AppCompatActivity {
         String name = nameInput.getText().toString();
         double weight = 0;
 
-        if (name.isEmpty()) {
+        if (name.replaceAll(" ","").isEmpty()) {
             nameInput.setError("You have to set a name.");
             nameOk = false;
+        } else if (name.contains(":")) {
+            nameInput.setError("Illegal characters: ':'");
+            nameOk = false;
+        } else {
+            nameOk = true;
         }
 
         try {
             weight = Double.parseDouble(weightInput.getText().toString());
+            weightOk = true;
         } catch (NumberFormatException ex) {
             weightOk = false;
             weightInput.setError("Error in weight.");

@@ -81,12 +81,11 @@ public class RoutinesActivity extends AppCompatActivity {
         spinners[3] = (Spinner) findViewById(R.id.spinnerfourth);
         spinners[4] = (Spinner) findViewById(R.id.spinnerfifth);
 
-        layouts = new RelativeLayout[5];
-        layouts[0] = (RelativeLayout) findViewById(R.id.firstSpinner);
-        layouts[1] = (RelativeLayout) findViewById(R.id.secondSpinner);
-        layouts[2] = (RelativeLayout) findViewById(R.id.thirdSpinner);
-        layouts[3] = (RelativeLayout) findViewById(R.id.fourthSpinner);
-        layouts[4] = (RelativeLayout) findViewById(R.id.fifthSpinner);
+        layouts = new RelativeLayout[4];
+        layouts[0] = (RelativeLayout) findViewById(R.id.secondSpinner);
+        layouts[1] = (RelativeLayout) findViewById(R.id.thirdSpinner);
+        layouts[2] = (RelativeLayout) findViewById(R.id.fourthSpinner);
+        layouts[3] = (RelativeLayout) findViewById(R.id.fifthSpinner);
         chosenMoves = new String[5];
         createRoutineButton = findViewById(R.id.createRoutineButton);
         readFile();
@@ -195,27 +194,43 @@ public class RoutinesActivity extends AppCompatActivity {
     public void initList() {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_spinner, R.id.textView, moveList);
 
-        for (Spinner spin : spinners) {
-            spin.setAdapter(arrayAdapter);
-            spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        for (int k = 0; k < spinners.length; k++) {
+            spinners[k].setAdapter(arrayAdapter);
+            spinners[k].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                    if (layouts[1].getVisibility() == View.GONE && position != 0) {
+
+
+                    if (layouts[0].getVisibility() == View.GONE && position != 0) {
                         chosenMoves[0] = moveList[position];
+                        layouts[0].setVisibility(View.VISIBLE);
+                    } else if (layouts[1].getVisibility() == View.GONE && position != 0) {
+                        chosenMoves[1] = moveList[position];
                         layouts[1].setVisibility(View.VISIBLE);
                     } else if (layouts[2].getVisibility() == View.GONE && position != 0) {
-                        chosenMoves[1] = moveList[position];
+                        chosenMoves[2] = moveList[position];
                         layouts[2].setVisibility(View.VISIBLE);
                     } else if (layouts[3].getVisibility() == View.GONE && position != 0) {
-                        chosenMoves[2] = moveList[position];
-                        layouts[3].setVisibility(View.VISIBLE);
-                    } else if (layouts[4].getVisibility() == View.GONE && position != 0) {
                         chosenMoves[3] = moveList[position];
-                        layouts[4].setVisibility(View.VISIBLE);
+                        layouts[3].setVisibility(View.VISIBLE);
                     } else {
                         chosenMoves[4] = moveList[position];
                     }
+
+                    for(int i = 0; i < spinners.length; i++) {
+                        if(spinners[i].getSelectedItem().toString().isEmpty() || spinners[i].getSelectedItem().toString() == null) {
+                            for(int k = i; k < layouts.length; k++) {
+
+                                layouts[k].setVisibility(View.GONE);
+                                chosenMoves[k] = null;
+                                spinners[k].setSelection(0);
+
+                            }
+                        }
+                    }
+
+
                 }
 
                 @Override
@@ -283,8 +298,13 @@ public class RoutinesActivity extends AppCompatActivity {
         String newName = te.getText().toString();
         boolean proceed = true;
 
-        if (newName.isEmpty() || newName.replaceAll(" ", "").length() <= 0) {
+        if (newName.isEmpty() || newName.replaceAll(" ", "").length() <= 0 ) {
             te.setError("You have to set a name for your routine.");
+            proceed = false;
+        }
+
+        if(newName.contains(":")) {
+            te.setError("Routine's name cannot contain illegal characters: ':'");
             proceed = false;
         }
         if (proceed) {
@@ -294,6 +314,12 @@ public class RoutinesActivity extends AppCompatActivity {
                     proceed = false;
                     break;
                 }
+            }
+
+            if(chosenMoves[0] == null) {
+                Toast.makeText(this, "Couldn't add an empty routine.",
+                        Toast.LENGTH_LONG).show();
+                proceed = false;
             }
         }
 
@@ -306,8 +332,10 @@ public class RoutinesActivity extends AppCompatActivity {
             routineBuilt += newName;
 
             for (String move : chosenMoves) {
-                if (move != null && move.length() >= 1) {
+
+                if (move != null && !move.isEmpty()) {
                     routineBuilt += ":" + move;
+                    System.out.println("VALITTU: " + move);
                 }
             }
 
@@ -340,8 +368,10 @@ public class RoutinesActivity extends AppCompatActivity {
                 layouts[k].setVisibility(View.GONE);
             }
 
-            for (String chosens : chosenMoves) {
-                chosens = "";
+            for(int i = 0; i < chosenMoves.length; i++) {
+                chosenMoves[i] = null;
+                spinners[i].setSelection(0);
+
             }
 
             Toast.makeText(this, "A new routine added!",

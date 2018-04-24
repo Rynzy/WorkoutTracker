@@ -57,7 +57,8 @@
         android:layout_alignBaseline="@id/weightText"
         android:layout_toRightOf="@id/weightText"
         android:hint="89.5"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:maxLength="8"/>
 
     <Button
         android:id="@+id/okButton"
