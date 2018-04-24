@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat">
         <activity android:name="fi.tampere.rynzy.workouttracker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,8 @@
         <activity android:name="fi.tampere.rynzy.workouttracker.RoutinesActivity" />
         <activity android:name="fi.tampere.rynzy.workouttracker.MovesActivity" />
         <activity android:name="fi.tampere.rynzy.workouttracker.ListActivity" />
-        <activity android:name="fi.tampere.rynzy.workouttracker.WorkoutActivity"></activity>
+        <activity android:name="fi.tampere.rynzy.workouttracker.WorkoutActivity" />
+        <activity android:name="fi.tampere.rynzy.workouttracker.SetWorkoutActivity"></activity>
     </application>
 
 </manifest>

@@ -97,7 +97,6 @@ public class MovesActivity extends AppCompatActivity {
             i.putExtra("name", name.split(":")[1]);
             i.putExtra("max", max.split(":")[2]);
             MovesActivity.this.startActivity(i);
-
         });
 
     }

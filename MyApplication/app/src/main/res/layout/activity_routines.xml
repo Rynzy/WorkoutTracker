@@ -43,85 +43,126 @@
             android:maxLength="50"
             android:singleLine="true" />
 
-        <TextView
-            android:id="@+id/firstMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/routineLabel"
-            android:layout_marginTop="20dp"
-            android:text="First move: " />
 
-        <Spinner
-            android:id="@+id/spinnerfirst"
+        <RelativeLayout
+            android:id="@+id/firstSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/firstMove"
-            android:layout_toEndOf="@+id/firstMove"
-            android:drawSelectorOnTop="true" />
-
-        <TextView
-            android:id="@+id/secondMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/firstMove"
+            android:layout_below="@+id/routineLabel"
             android:layout_marginTop="20dp"
-            android:text="Second move: " />
+            android:addStatesFromChildren="true">
 
-        <Spinner
-            android:id="@+id/spinnersecond"
+            <TextView
+                android:id="@+id/firstMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="First move: " />
+
+            <Spinner
+                android:id="@+id/spinnerfirst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/secondSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/secondMove"
-            android:layout_toEndOf="@+id/secondMove"
-            android:drawSelectorOnTop="true" />
-
-        <TextView
-            android:id="@+id/thirdMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/secondMove"
+            android:layout_below="@+id/firstSpinner"
             android:layout_marginTop="20dp"
-            android:text="Third move: " />
+            android:addStatesFromChildren="true"
+            android:visibility="gone">
 
-        <Spinner
-            android:id="@+id/spinnerthird"
+            <TextView
+                android:id="@+id/secondMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Second move: " />
+
+            <Spinner
+                android:id="@+id/spinnersecond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/thirdMove"
-            android:layout_toEndOf="@+id/thirdMove"
-            android:drawSelectorOnTop="true" />
-
-        <TextView
-            android:id="@+id/fourthMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/thirdMove"
+            android:id="@+id/thirdSpinner"
+            android:layout_below="@+id/secondSpinner"
             android:layout_marginTop="20dp"
-            android:text="Fourth move: " />
+            android:addStatesFromChildren="true"
+            android:visibility="gone">
 
-        <Spinner
-            android:id="@+id/spinnerfourth"
+            <TextView
+                android:id="@+id/thirdMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Third move: " />
+
+            <Spinner
+                android:id="@+id/spinnerthird"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fourthSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/fourthMove"
-            android:layout_toEndOf="@+id/fourthMove"
-            android:drawSelectorOnTop="true" />
-
-        <TextView
-            android:id="@+id/fifthMove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fourthMove"
+            android:layout_below="@+id/thirdSpinner"
             android:layout_marginTop="20dp"
-            android:text="Fifth move: " />
+            android:addStatesFromChildren="true"
+            android:visibility="gone">
 
-        <Spinner
-            android:id="@+id/spinnerfifth"
+            <TextView
+                android:id="@+id/fourthMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Fourth move: " />
+
+            <Spinner
+                android:id="@+id/spinnerfourth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/fifthSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/fifthMove"
-            android:layout_toEndOf="@+id/fifthMove"
-            android:drawSelectorOnTop="true" />
+            android:layout_below="@+id/fourthSpinner"
+            android:layout_marginTop="20dp"
+            android:addStatesFromChildren="true"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/fifthMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Fifth move: " />
+
+            <Spinner
+                android:id="@+id/spinnerfifth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/addTheRoutine"

@@ -14,27 +14,25 @@ public class MainApp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
-
     }
 
     public void movesButton(View view) {
-
-        System.out.println("moves");
         Intent myIntent = new Intent(MainApp.this, MovesActivity.class);
         MainApp.this.startActivity(myIntent);
     }
 
     public void routinesButton(View view) {
-        System.out.println("routines");
         Intent myIntent = new Intent(MainApp.this, RoutinesActivity.class);
         MainApp.this.startActivity(myIntent);
     }
 
     public void progressButton(View view) {
-        System.out.println("progress");
+        Intent myIntent = new Intent(MainApp.this, ProgressActivity.class);
+        MainApp.this.startActivity(myIntent);
     }
 
     public void settingsButton(View view) {
-        System.out.println("settings");
+        Intent myIntent = new Intent(MainApp.this, SettingsActivity.class);
+        MainApp.this.startActivity(myIntent);
     }
 }

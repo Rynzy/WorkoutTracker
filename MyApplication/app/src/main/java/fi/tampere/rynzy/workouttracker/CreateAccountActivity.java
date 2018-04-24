@@ -86,28 +86,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         CreateAccountActivity.this.startActivity(myIntent);
     }
 
-    public void readFile() {
-
-        File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
-        File fileWithinMyDir = new File(mydir, "account.txt");
-        int ch;
-        StringBuffer fileContent = new StringBuffer("");
-
-        try (FileInputStream out = new FileInputStream(fileWithinMyDir)) {
-
-            try {
-                while ((ch = out.read()) != -1)
-                    fileContent.append((char) ch);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } catch (IOException ex) {
-
-        }
-
-    }
-
     public void createMoves() {
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
         ArrayList<Move> moves = new ArrayList<>();
