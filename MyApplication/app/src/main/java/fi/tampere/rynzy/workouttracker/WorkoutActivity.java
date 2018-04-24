@@ -1,9 +1,6 @@
 package fi.tampere.rynzy.workouttracker;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,23 +9,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-
 import fi.tampere.rynzy.myapplication.R;
 
+/**
+ * WorkoutActivity is a class which rolls the singular selected workout move.
+ * <p>
+ * Activity loads the chosen workoutmove and fetches all the data of the move.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class WorkoutActivity extends AppCompatActivity {
 
+    /**
+     * Timer for keeping time, if users wants to.
+     */
     private Timer timer;
+    /**
+     * TextView elements for displaying data.
+     */
     private TextView moveName, timerView, currentMax, current;
+    /**
+     * Boolean to check if the timer is on.
+     */
     private boolean timerOn;
 
+    /**
+     * OnCreate method of the activity. Initial initialization.
+     *
+     * @param savedInstanceState Saved bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +64,11 @@ public class WorkoutActivity extends AppCompatActivity {
         timerOn = false;
     }
 
-
+    /**
+     * Starts the timer or stops it.
+     *
+     * @param view Clicked View element, in this case a button.
+     */
     public void startTimer(View view) {
         Button bt = findViewById(view.getId());
 
@@ -65,6 +86,9 @@ public class WorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Updates the time to the ui element on a seperate thread.
+     */
     public void updateUi() {
         Thread t = new Thread() {
 
@@ -83,6 +107,11 @@ public class WorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method for removing a move.
+     *
+     * @param v Button elemet that is clicked.
+     */
     public void removeMove(View v) {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
@@ -99,6 +128,11 @@ public class WorkoutActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Method for deleting a move.
+     * <p>
+     * Finds the current move and removes the file from the phone.
+     */
     public void removeFile() {
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
         File movesDir = new File(mydir, "moves");
@@ -107,6 +141,11 @@ public class WorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds the current amount of moves completed to the users's progress with a date stamp.
+     *
+     * @param v ViewElement, a button.
+     */
     public void addToProgress(View v) {
         if (checkInfo()) {
             File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
@@ -162,6 +201,9 @@ public class WorkoutActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks if the user input is correct on the completed amount.
+     */
     public boolean checkInfo() {
         if (current.getText().toString().isEmpty()) {
             return false;

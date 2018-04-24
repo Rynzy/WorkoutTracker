@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,17 +17,45 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import fi.tampere.rynzy.myapplication.R;
 
+/**
+ * SetWorkoutActivity is a class which rolls the routine activity.
+ * <p>
+ * Activity loads the chosen routine and sets the next workout moves data accordingly.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class SetWorkoutActivity extends AppCompatActivity {
 
+    /**
+     * Timer for keeping time, if users wants to.
+     */
     private Timer timer;
+    /**
+     * TextView elements for displaying data.
+     */
     private TextView moveName, timerView, currentMax, current, routineName, currentView, totalView;
+    /**
+     * Boolean to check if the timer is on.
+     */
     private boolean timerOn;
+    /**
+     * List of moves in the routine.
+     */
     private List<String> listOfMove;
+    /**
+     * Current move's index.
+     */
     private int currentMoveIndex;
 
+    /**
+     * OnCreate method of the activity. Initial initialization.
+     *
+     * @param savedInstanceState Saved bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +92,11 @@ public class SetWorkoutActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Starts the timer or stops it.
+     *
+     * @param view Clicked View element, in this case a button.
+     */
     public void startTimer(View view) {
 
         Button bt = findViewById(view.getId());
@@ -83,6 +115,9 @@ public class SetWorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Updates the time to the ui element on a seperate thread.
+     */
     public void updateUi() {
         Thread t = new Thread() {
 
@@ -101,6 +136,11 @@ public class SetWorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds the current amount of moves completed to the users's progress with a date stamp.
+     *
+     * @param v ViewElement, a button.
+     */
     public void addToProgress(View v) {
         if (checkInfo()) {
             File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
@@ -167,6 +207,9 @@ public class SetWorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks if the user input is correct on the completed amount.
+     */
     public boolean checkInfo() {
         if (current.getText().toString().isEmpty()) {
             return false;
@@ -174,6 +217,13 @@ public class SetWorkoutActivity extends AppCompatActivity {
         return (Integer.parseInt(current.getText().toString()) > 0);
     }
 
+    /**
+     * Reads the routines directory within the phone and loads it
+     * and populates the array with the data received.
+     * <p>
+     * This also parses the routine and fetches all the moves and their data and
+     * sets that data into an array.
+     */
     public void readFile() {
 
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
@@ -195,13 +245,9 @@ public class SetWorkoutActivity extends AppCompatActivity {
         } catch (IOException ex) {
 
         }
-
-        System.out.println(fileContent.toString());
-
         String[] moveNames = fileContent.toString().split(":");
 
         for (int i = 1; i < moveNames.length; i++) {
-
             File checkMove = new File(mydir, "moves");
             File moveFile = new File(checkMove, moveNames[i] + ".txt");
             if (moveFile.exists()) {
@@ -209,10 +255,12 @@ public class SetWorkoutActivity extends AppCompatActivity {
             }
         }
 
-        System.out.println(listOfMove);
 
     }
 
+    /**
+     * Initializes the next move of the routine by loading it's data.
+     */
     public void initCurrentMove() {
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
         File movesDir = new File(mydir, "moves");
@@ -242,10 +290,13 @@ public class SetWorkoutActivity extends AppCompatActivity {
         Button bt = findViewById(R.id.timerButton);
         bt.setText("START");
         timer = new Timer();
-
-
     }
 
+    /**
+     * Method for removing a routine.
+     *
+     * @param v Button elemet that is clicked.
+     */
     public void removeMove(View v) {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
@@ -262,11 +313,15 @@ public class SetWorkoutActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * Method for deleting a routine.
+     * <p>
+     * Finds the current routine and removes the file from the phone.
+     */
     public void removeFile() {
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
         File movesDir = new File(mydir, "routines");
         File fileWithinMyDir = new File(movesDir, routineName.getText() + ".txt");
         fileWithinMyDir.delete();
-
     }
 }

@@ -1,12 +1,36 @@
 package fi.tampere.rynzy.workouttracker;
 
-
+/**
+ * A class which is used to create an Timer object.
+ * <p>
+ * This is used whenever user is doing an workout move. Timer includes seconds, minutes and hours
+ * in HH:MM:SS format.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class Timer {
+    /**
+     * Minutes of the timer.
+     */
     private int minutes;
+    /**
+     * Seconds of the timer.
+     */
     private int seconds;
+    /**
+     * Hours of the timer.
+     */
     private int hours;
+    /**
+     * Boolean check for if the timer is running.
+     */
     private boolean running;
 
+    /**
+     * Default constructor for the timer.
+     */
     public Timer() {
         this.minutes = 0;
         this.seconds = 0;
@@ -14,10 +38,18 @@ public class Timer {
         running = false;
     }
 
+    /**
+     * Sets the timer state to running.
+     *
+     * @param running value
+     */
     public void setRunning(boolean running) {
         this.running = running;
     }
 
+    /**
+     * Starts the timer within a new thread, updates the timer every second.
+     */
     public void startTimer() {
 
         Runnable runnable = () -> {
@@ -43,6 +75,9 @@ public class Timer {
 
     }
 
+    /**
+     * Increases seconds by one, and hours and minutes if neccessary.
+     */
     public void increase() {
         this.seconds++;
 
@@ -57,30 +92,66 @@ public class Timer {
         }
     }
 
+    /**
+     * Getter for minutes.
+     *
+     * @return minutes
+     */
     public int getMinutes() {
         return minutes;
     }
 
+    /**
+     * Setter for minutes.
+     *
+     * @param minutes value
+     */
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 
+    /**
+     * Getter for seconds.
+     *
+     * @return seconds
+     */
     public int getSeconds() {
         return seconds;
     }
 
+    /**
+     * Setter for seconds.
+     *
+     * @param seconds value
+     */
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
 
+    /**
+     * Getter for minutes.
+     *
+     * @return minutes
+     */
     public int getHours() {
         return hours;
     }
 
+    /**
+     * Setter for hours.
+     *
+     * @param hours value
+     */
     public void setHours(int hours) {
         this.hours = hours;
     }
 
+    /**
+     * Creates a string presentation of the timer
+     * in predefined structure HH:MM:SS.
+     *
+     * @return string presentation of the timer
+     */
     @Override
     public String toString() {
         String hours = getHours() + "";
@@ -99,6 +170,11 @@ public class Timer {
         return hours + ":" + minutes + ":" + seconds;
     }
 
+    /**
+     * Getter for timer to see if it is running.
+     *
+     * @return value wheter the timer is running
+     */
     public boolean isRunning() {
         return running;
     }

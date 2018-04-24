@@ -6,21 +6,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import fi.tampere.rynzy.myapplication.R;
 
+/**
+ * SettingsActivity which is used in weigh in.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class SettingsActivity extends AppCompatActivity {
 
+    /**
+     * EditTExt element for user input of the weight.
+     */
     private EditText weightInput;
+    /**
+     * Given weight as a double.
+     */
     private double weight;
 
+    /**
+     * OnCreate method of the activity. Initial initialization.
+     *
+     * @param savedInstanceState Saved bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +44,11 @@ public class SettingsActivity extends AppCompatActivity {
         weightInput = (EditText) findViewById(R.id.weightInput);
     }
 
+    /**
+     * Checks if the users input is correct and adds it to the users progress.
+     *
+     * @param v Clicked View element, in this case a button.
+     */
     public void checkInfo(View v) {
 
         try {

@@ -12,29 +12,64 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import fi.tampere.rynzy.myapplication.R;
 
+/**
+ * Activity for creating and choosing a routine.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class RoutinesActivity extends AppCompatActivity {
 
-    private ListView list;
+    /**
+     * ListView elements for displaying all the existing routines.
+     */
     private ListView listRoutines;
+    /**
+     * List of move names.
+     */
     private String moveList[] = {};
+    /**
+     * List of routine names.
+     */
     private String routineList[] = {};
+    /**
+     * List of routines and all their data.
+     */
     private String completeSet[];
+    /**
+     * Spinner element array which hold data for move names.
+     */
     private Spinner[] spinners;
+    /**
+     * Boolean value for checking if creating a routine.
+     */
     private boolean createRoutine;
+    /**
+     * Button elements for creating and adding a routine.
+     */
     private Button createRoutineButton;
+    /**
+     * Array list of moves chosen for creation of a routine.
+     */
     private String[] chosenMoves;
+    /**
+     * Array list of layouts that are displayed when creating a new routine.
+     */
     private RelativeLayout[] layouts;
 
+    /**
+     * OnCreate method of the activity. Initial initialization.
+     *
+     * @param savedInstanceState Saved bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +99,10 @@ public class RoutinesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Reads the moves directory within the phone and loads them all
+     * and populates an array with the data received.
+     */
     public void readFile() {
 
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
@@ -108,6 +147,10 @@ public class RoutinesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Reads the routines directory within the phone and loads them all
+     * and populates an array with the data received.
+     */
     public void readFileRoutines() {
 
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
@@ -146,8 +189,10 @@ public class RoutinesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initializes the View list element for the spinners.
+     */
     public void initList() {
-        list = (ListView) findViewById(R.id.listView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_spinner, R.id.textView, moveList);
 
         for (Spinner spin : spinners) {
@@ -182,6 +227,9 @@ public class RoutinesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Initializes the View list element, method is called whenever a change is detected.
+     */
     public void initListRoutine() {
         listRoutines = (ListView) findViewById(R.id.listView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list, R.id.textView, routineList);
@@ -190,7 +238,6 @@ public class RoutinesActivity extends AppCompatActivity {
         listRoutines.setOnItemClickListener((parent, view, position, id) -> {
             Intent i = new Intent(RoutinesActivity.this, SetWorkoutActivity.class);
             String name = completeSet[position];
-            System.out.println("TASSAAAAAAAAAAAAAAAAAAAA:" + name.split(":")[0]);
             i.putExtra("routineName", name.split(":")[0]);
             RoutinesActivity.this.startActivity(i);
 
@@ -198,6 +245,13 @@ public class RoutinesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method for detecting a create routine button click.
+     * <p>
+     * Changes presentation of the app according to the state of the button.
+     *
+     * @param v View Element button
+     */
     public void createARoutine(View v) {
         if (createRoutine) {
             createRoutine = false;
@@ -216,6 +270,14 @@ public class RoutinesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method for adding a new routine.
+     * <p>
+     * Checks if the routine is legal and then either adds it as a new file or asks the user for
+     * fixes.
+     *
+     * @param v View Element button
+     */
     public void addTheRoutine(View v) {
         EditText te = findViewById(R.id.newRoutineName);
         String newName = te.getText().toString();
@@ -249,7 +311,6 @@ public class RoutinesActivity extends AppCompatActivity {
                 }
             }
 
-            System.out.println("NIMIII: " + newName);
             File fileWithinMyDir = new File(movesDir, newName + ".txt");
 
             try (FileOutputStream out = new FileOutputStream(fileWithinMyDir)) {

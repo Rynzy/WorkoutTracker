@@ -4,23 +4,35 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import fi.tampere.rynzy.myapplication.R;
 
+/**
+ * ProgressActivity where user can see his weight gain/loss.
+ *
+ * Account file is loaded and parsed.
+ * Populates the tables data with the values.
+ *
+ * @author Joni Ryynänen
+ * @version 1.0
+ * @since 2018-04-24
+ */
 public class ProgressActivity extends AppCompatActivity {
 
+    /**
+     * TextView elements for displaying data.
+     */
     private TextView start, min, max, current, change;
 
+    /**
+     * OnCreate method of the activity. Initial initialization.
+     *
+     * @param savedInstanceState Saved bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +45,12 @@ public class ProgressActivity extends AppCompatActivity {
         readWeight();
     }
 
+    /**
+     * Reads the account file for weight data.
+     *
+     * Values for the textviews are also set here.
+     *
+     */
     public void readWeight() {
 
         File mydir = this.getDir("workouttracker", Context.MODE_PRIVATE);
