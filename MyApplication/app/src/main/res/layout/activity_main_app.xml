@@ -78,7 +78,6 @@
                 android:adjustViewBounds="true"
                 android:onClick="settingsButton"
                 android:scaleType="fitCenter"
-                android:src="@drawable/settings"
                 android:text="Weigh in" />
 
 

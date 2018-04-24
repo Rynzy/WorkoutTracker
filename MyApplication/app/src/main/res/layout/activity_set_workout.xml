@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/routineName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Routine Name"
+        android:textSize="42dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/moveName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Move"
+        android:textSize="42dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current max: " />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="00:00"
+        android:textSize="32dp" />
+
+    <Button
+        android:id="@+id/timerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startTimer"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/removeMove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="removeMove"
+        android:text="Delete Routine" />
+
+    <EditText
+        android:id="@+id/currentAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Current amount"
+        android:inputType="number" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addToProgress"
+        android:text="Add to progress." />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/currentMove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="1" />
+
+        <TextView
+            android:id="@+id/totalAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="/5" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
